@@ -1,0 +1,44 @@
+
+#!/bin/bash
+
+# ===== CONFIGURAZIONE =====
+# Cambia questi valori
+GITHUB_USERNAME="shorewall"
+REPO_NAME="hlsproxy"   # nome del repo che vuoi creare
+BRANCH="main"
+
+# Cartella del progetto (cartella corrente di default)
+PROJECT_DIR=$(pwd)
+
+# ===== SCRIPT =====
+
+echo "📂 Pulizia eventuale repository Git locale..."
+rm -rf "$PROJECT_DIR/.git"
+
+echo "🔧 Inizializzo nuovo repository Git..."
+git init
+
+echo "📝 Creo .gitignore minimo..."
+cat > .gitignore <<EOL
+node_modules/
+dist/
+.env
+EOL
+
+echo "➕ Aggiungo tutti i file..."
+git add .
+
+echo "💾 Primo commit..."
+git commit -m "Primo commit"
+
+echo "🌐 Imposto il branch principale..."
+git branch -M $BRANCH
+
+echo "📡 Imposto remoto HTTPS su GitHub..."
+git remote add origin https://github.com/$GITHUB_USERNAME/$REPO_NAME.git
+
+echo "🚀 Ora fai il push su GitHub usando Personal Access Token"
+echo "Quando ti chiederà username/password:"
+echo "- username: $GITHUB_USERNAME"
+echo "- password: il tuo Personal Access Token (PAT)"
+git push -u origin $BRANCH
