@@ -1,0 +1,6 @@
+{
+  "name": "hlsproxy",
+  "main": "hlsproxy.js",
+  "compatibility_date": "2026-01-03",
+  "workers_dev": true
+}
